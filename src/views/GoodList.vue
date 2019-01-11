@@ -54,8 +54,8 @@
       addGood() {
         this.isShow = !this.isShow
       },
-      goodList() {
-        let goodListUrl = "http://linlinchi-admin.auteng.cn/goods/list?limit="+ this.pagesize +"&current_page="+ this.currentPage +"&status=0&name="
+      goodList(pagesize, currentPage) {
+        let goodListUrl = "http://linlinchi-admin.auteng.cn/goods/list?limit="+ pagesize +"&current_page="+ currentPage +"&status=0&name="
         this.axios.get(goodListUrl).then( res => {
           this.tableData = res.data.data.items
           this.total = parseInt(res.data.data.count)

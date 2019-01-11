@@ -42,7 +42,7 @@
     },
     methods: {
       classifyList(pagesize, currentPage) {
-        let classifyListUrl = "http://linlinchi-admin.auteng.cn/category/list?limit="+ this.pagesize +"&current_page="+ this.currentPage +"&status=1&name="
+        let classifyListUrl = "http://linlinchi-admin.auteng.cn/category/list?limit="+ pagesize +"&current_page="+ currentPage +"&status=1&name="
         this.axios.get(classifyListUrl).then( res => {
           this.tableData = res.data.data.items
           this.total = parseInt(res.data.data.count)

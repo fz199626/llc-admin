@@ -43,9 +43,8 @@
     },
     methods: {
       onSubmit(formData) {
-        let addForm = this.addForm
         let loginUrl = "http://linlinchi-admin.auteng.cn/category/add"
-        let data = { id: addForm.id, name: addForm.name, sort: addForm.sort, status: addForm.status }
+        let data = this.addForm
         this.axios.post(loginUrl, data).then( res => {
           if(res.data.success){
             this.$emit('refres')

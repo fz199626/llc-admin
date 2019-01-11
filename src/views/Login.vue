@@ -27,7 +27,7 @@
         this.axios.post(loginUrl, data).then( res => {
           if(res.data.success){
             sessionStorage.setItem('login',res.data.success);
-            this.$router.push('/');
+            this.$router.push('/order');
           }else {
             this.$message({showClose: true, message: '登陆失败！', type: 'error'})
           }

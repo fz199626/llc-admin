@@ -4,8 +4,7 @@
       <el-header>
         <img class="logo" src="./assets/logo.png"/>
         <div class="head-portrait">
-          <img src="./assets/head.jpg"/>
-          <div>灵灵柒</div>
+          <img src="./assets/logo.png"/><div>灵灵柒</div>
         </div>
       </el-header>
       <el-container>
@@ -28,7 +27,8 @@
                   <span slot="title">订单</span>
                 </template>
                 <el-menu-item-group>
-                  <el-menu-item index="/">订单</el-menu-item>
+                  <el-menu-item index="/order">订单</el-menu-item>
+                  <el-menu-item index="/allOrders">全部订单</el-menu-item>
                 </el-menu-item-group>
               </el-submenu>
               <el-submenu index="3">
@@ -38,7 +38,7 @@
                 </template>
                 <el-menu-item-group>
                   <el-menu-item index="3-1">全店情况</el-menu-item>
-                  <el-menu-item index="3-2">用户反馈</el-menu-item>
+                  <el-menu-item index="/feedback">用户反馈</el-menu-item>
                 </el-menu-item-group>
               </el-submenu>
             </el-menu>

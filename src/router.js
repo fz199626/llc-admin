@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Order from './views/Order.vue'
 
 Vue.use(Router)
 
@@ -9,14 +8,19 @@ const router = new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/login',
+      path: '/',
       name: 'login',
       component: () => import(/* webpackChunkName: "login" */ './views/Login.vue')
     },
     {
-      path: '/',
+      path: '/order',
       name: 'order',
-      component: Order
+      component: () => import(/* webpackChunkName: "order" */ './views/Order.vue')
+    },
+    {
+      path: '/allOrders',
+      name: 'allOrders',
+      component: () => import(/* webpackChunkName: "allOrders" */ './views/AllOrders.vue')
     },
     {
       path: '/goodList',
@@ -28,10 +32,15 @@ const router = new Router({
       name: 'goodClassify',
       component: () => import(/* webpackChunkName: "goodClassify" */ './views/GoodClassify.vue')
     },
+    {
+      path: '/feedback',
+      name: 'feedback',
+      component: () => import(/* webpackChunkName: "feedback" */ './views/Feedback.vue')
+    }
   ]
 })
 router.beforeEach((to, from, next) => {
-  const whiteList = ['/goodList'] // 路由白名单
+  const whiteList = [] // 路由白名单
   const login = sessionStorage.getItem('login')
   if (login == "true") {
     next();
@@ -39,10 +48,10 @@ router.beforeEach((to, from, next) => {
     if (whiteList.indexOf(to.path) !== -1) { // 在免登录白名单，直接进入
       next();
     } else {
-      if (to.path === '/login') {
+      if (to.path === '/') {
         next()
       } else {
-        next('/login')
+        next('/')
       }
     }
   }

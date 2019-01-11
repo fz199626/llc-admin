@@ -91,21 +91,8 @@ export default {
       return this.$confirm(`确定移除 ${ file.name }？`);
     },
     onSubmit(formData) {
-      let addForm = this.addForm
       let addUrl = "http://linlinchi-admin.auteng.cn/goods/add"
-      let data = {
-        id: addForm.id,
-        category_id: addForm.category_id,
-        name: addForm.name,
-        describe: addForm.describe,
-        image: addForm.image,
-        sort: addForm.sort,
-        price: addForm.price,
-        cost: addForm.cost,
-        preferential_price: addForm.preferential_price,
-        status: addForm.status,
-        taste:{1:1, 2:1, 3:1}
-      }
+      let data = this.addForm
       this.axios.post(addUrl, data).then( res => {
         if(res.data.success){
           this.$emit('refres')
