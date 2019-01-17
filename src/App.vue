@@ -13,7 +13,7 @@
             <el-menu default-active="2" :router="true" :default-active="$route.path" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
               <el-submenu index="1">
                 <template slot="title">
-                  <i class="el-icon-location"></i>
+                  <i class="el-icon-menu"></i>
                   <span>商品</span>
                 </template>
                 <el-menu-item-group>
@@ -23,7 +23,7 @@
               </el-submenu>
               <el-submenu index="2">
                 <template slot="title">
-                  <i class="el-icon-menu"></i>
+                  <i class="el-icon-bell"></i>
                   <span slot="title">订单</span>
                 </template>
                 <el-menu-item-group>
@@ -33,7 +33,7 @@
               </el-submenu>
               <el-submenu index="3">
                 <template slot="title">
-                  <i class="el-icon-menu"></i>
+                  <i class="el-icon-view"></i>
                   <span slot="title">统计</span>
                 </template>
                 <el-menu-item-group>

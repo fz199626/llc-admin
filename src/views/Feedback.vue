@@ -3,14 +3,12 @@
     <div class="feedback-header">
       <div>用户反馈</div>
       <div class="starts">
-        <span @click="status(0)" :class="{choice:tabIndex == 0}">未查看</span>
-        <span @click="status(1)" :class="{choice:tabIndex == 1}">已处理</span>
-        <span @click="status(2)" :class="{choice:tabIndex == 2}">已采纳</span>
+        <span v-for="(tab,index) in tabs" @click="status(index)" :class="{choice:tabIndex == index}">{{tab.title}}</span>
       </div>
     </div>
     <el-table :data="tableData" height="80%" width="100%">
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column prop="id" label="id"></el-table-column>
+      <el-table-column prop="id" label="id" width="60"></el-table-column>
       <el-table-column prop="tel" label="手机号"></el-table-column>
       <el-table-column prop="content" label="反馈内容"></el-table-column>
       <el-table-column label="操作">
@@ -30,12 +28,13 @@
   export default {
     data() {
       return {
+        tabs: [{"title": "未查看"},{"title": "已处理"},{"title": "已采纳"}],
+        tabIndex: 0,
         tableData: [],
         total: 0,
         pagesize: 10,
         isHandle: true,
         isAdopt: true,
-        tabIndex: 0
       }
     },
     mounted() {

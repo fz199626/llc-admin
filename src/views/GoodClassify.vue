@@ -7,7 +7,7 @@
     </div>
     <el-table :data="tableData" height="80%" width="100%">
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column prop="id" label="id"></el-table-column>
+      <el-table-column prop="id" label="id" width="60"></el-table-column>
       <el-table-column prop="name" label="名称"></el-table-column>
       <el-table-column prop="sort" label="排序"></el-table-column>
       <el-table-column prop="status" label="状态"></el-table-column>

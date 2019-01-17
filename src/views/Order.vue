@@ -1,81 +1,57 @@
 <template>
   <div class="order">
     <div class="order-nav">
-      <div class="nav-li" v-for="(item,index) in meun" :key="item.title" @click="tabNameClick(index)">
+      <div class="nav-li" v-for="tab in tabs" :key="tab.status" @click="tabClick(tab.status)" :style="{ background: tab.bj }">
         <div class="order-tips">
-          <div>{{item.title}}</div>
-          <div class="order-num">10</div>
+          <div>{{tab.title}}</div>
+          <div class="order-num">{{tab.count}}</div>
         </div>
-        <img src="./../assets/logo.png"/>
+        <img :src="tab.img"/>
       </div>
     </div>
     <div class="order-cont">
-      <div class="order-cont-list" v-for="(item,index) in meun" :key="item.title" v-if="index == tabIndex">
-        <div class="order-cont-list-li">
+      <div class="order-cont-list">
+        <div class="order-cont-list-li" v-for="item in tableData" :key="item.id">
           <div class="order-cont-list-li-cont">
             <div class="order-cont-list-li-head">
-              <span class="head-left" style="">外卖</span>
-              <span class="head-content">订单：16766767678</span>
-              <span class="head-right">外卖</span>
+              <span class="head-left"><span v-if="item.way == 1">自取</span><span v-else>外卖</span></span>
+              <span class="head-content">订单号：{{item.order_num}}</span>
             </div>
             <ul class="order-list">
-              <li>
+              <li v-for="good in item.orderDetails" :key="good.id">
                 <div class="li-left">
-                  <span class="title">奶茶</span><br />
-                  <span>大/热/无糖</span>
+                  <span class="title">{{good.goods_info.name}}</span>
                 </div>
                 <div class="num-price">
-                  <span>x1</span>
-                  <span class="unit-price">￥19</span>
-                </div>
-              </li>
-              <li>
-                <div class="li-left">
-                  <span class="title">奶茶</span><br />
-                  <span>大/热/无糖</span>
-                </div>
-                <div class="num-price">
-                  <span>x1</span>
-                  <span class="unit-price">￥19</span>
-                </div>
-              </li>
-              <li>
-                <div class="li-left">
-                  <span class="title">奶茶</span><br />
-                  <span>大/热/无糖</span>
-                </div>
-                <div class="num-price">
-                  <span>x1</span>
-                  <span class="unit-price">￥19</span>
-                </div>
-              </li>
-              <li>
-                <div class="li-left">
-                  <span class="title">奶茶</span><br />
-                  <span>大/热/无糖</span>
-                </div>
-                <div class="num-price">
-                  <span>x1</span>
-                  <span class="unit-price">￥19</span>
+                  <span>x{{good.num}}</span>
+                  <span class="unit-price">￥{{good.goods_info.price}}</span>
                 </div>
               </li>
             </ul>
           </div>
           <div class="order-cont-list-li-bon">
             <div class="discount">
-              <p><span>配送费</span><span>￥5</span></p>
-              <p><span>优惠折扣</span><span>￥5</span></p>
+              <p><span>配送费</span><span>￥{{item.distribution_fee}}</span></p>
+              <p><span>优惠折扣</span><span>￥0</span></p>
             </div>
             <div class="balance">
-              <span>2017.12.10 7:45:36</span>
-              <div><span>x3</span><span>￥0</span></div>
+              <span>{{item.create_time}}</span>
+              <div><span>x{{item.num}}</span><span>￥{{item.total_price}}</span></div>
             </div>
-            <div class="remarks">
-              备注信息备注信息备注信息备注信息备注信息
-              备注信息备注信息备注信息备注信息备注信息
-              备注信息备注信息备注信息备注信息备注信息
+            <div class="remarks">{{item.remarks}}</div>
+            <div class="bottom-btn" v-if="nowStatus == 1 || nowStatus == 2">
+              <div class="btns">
+                <div v-if="nowStatus == 1">
+                  <span class="call" v-if="item.way == 1">通知取餐</span>
+                  <span class="notice" v-else>呼叫配送员</span>
+                </div>
+                <div v-else>
+                  <span class="call" v-if="item.way == 1">已配送27分钟</span>
+                  <span class="notice" v-else>已通知27分钟</span>
+                </div>
+              </div>
+              <div class="cancel">取消订单</div>
             </div>
-            <div class="cancel">取消呼叫配送员</div>
           </div>
         </div>
       </div>
@@ -87,19 +63,33 @@
 export default {
   data() {
     return {
-      meun: [
-        {"title":"新外卖订单","content":"可使用"},
-        {"title":"外卖订单","content":"已使用"},
-        {"title":"配送中","content":"已过期"},
-        {"title":"取消订单","content":"已过期"},
+      tabs: [
+        {"title": "新订单","status": "1","count": "0","bj": "#666","img": require("./../assets/logo.png")},
+        {"title": "配送中","status": "2","count": "0","bj": "#999","img": require("./../assets/logo.png")},
+        {"title": "已完成","status": "3","count": "0","bj": "#ccc","img": require("./../assets/logo.png")},
+        // {"title": "已取消","status": "4","count": "0","bj": "#999","img": require("./../assets/logo.png")},
       ],
-      tabIndex: '',
+      nowStatus: 1,
+      tableData: []
     }
   },
+  mounted() {
+    this.orders(10, 1, 1)
+  },
   methods: {
-    tabNameClick(index){
-      this.tabIndex = index;
+    tabClick(status){
+      this.nowStatus = status
+      this.orders(10, 1, status)
     },
+    orders(pagesize, currentPage, status) {
+      let ordersUrl = "http://linlinchi-admin.auteng.cn/order/list?limit=" + pagesize + "&current_page=" + currentPage + "&status=" + status
+      this.axios.get(ordersUrl).then( res => {
+        this.tableData = res.data.data.items
+        this.tabs[0].count = res.data.data.other_count[0]
+        this.tabs[1].count = res.data.data.other_count[1]
+        this.tabs[2].count = res.data.data.other_count[2]
+      })
+    }
   }
 }
 </script>
@@ -107,7 +97,6 @@ export default {
 <style scoped lang="less">
   .order{
     height: 100%;
-    min-width: 980px;
     .order-nav{
       color: #fff;
       height: 18%;
@@ -116,7 +105,8 @@ export default {
       justify-content: space-between;
       .nav-li{
         background: #999;
-        width: 16%;
+        width: 18%;
+        min-width: 150px;
         border-radius: 10px;
         cursor: pointer;
         display: flex;
@@ -268,15 +258,36 @@ export default {
               word-break:break-all;
               word-wrap:break-word;
             }
-            .cancel{
-              width: 90%;
-              background: #ccc;
-              margin: auto;
-              height: 40px;
-              border-radius: 8px;
-              text-align: center;
-              line-height: 40px;
+            .bottom-btn{
+              width: 100%;
               color: #fff;
+              font-size: 18px;
+              display: flex;
+              justify-content: space-between;
+              div{
+                height: 50px;
+                border-radius: 8px;
+                line-height: 50px;
+                text-align: center;
+                span{
+                  display: inline-block;
+                  width: 100%;
+                  border-radius: 8px;
+                }
+                .call{
+                  background: green;
+                }
+                .notice{
+                  background: green;
+                }
+              }
+              .btns{
+                width: 55%;
+              }
+              .cancel{
+                width: 40%;
+                background: #ccc;
+              }
             }
           }
         }
