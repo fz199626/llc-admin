@@ -3,12 +3,11 @@
     <div class="allOrders-header">
       <div>订单列表</div>
       <div class="starts">
-        <span v-for="(tab,index) in tabs" @click="status(index)" :class="{choice:tabIndex == index}">{{tab.title}}</span>
+        <span v-for="tab in tabs" @click="status(tab.status)" :class="{choice:tabIndex == tab.status}">{{tab.title}}</span>
       </div>
     </div>
     <el-table :data="tableData" height="80%" width="100%">
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column prop="id" label="id" width="60"></el-table-column>
       <el-table-column prop="contacts" label="姓名"></el-table-column>
       <el-table-column prop="tel" label="手机号"></el-table-column>
       <el-table-column prop="address" label="地址"></el-table-column>
@@ -29,8 +28,15 @@
   export default {
     data() {
       return {
-        tabs: [{"title": "待接单"},{"title": "已接单"},{"title": "配送中"},{"title": "已完成"}],
-        tabIndex: 3,
+        tabs: [
+          {"title": "待支付","status": 0},
+          {"title": "待接单","status": 1},
+          {"title": "已接单","status": 2},
+          {"title": "配送中","status": 3},
+          {"title": "已完成","status": 4},
+          {"title": "已取消","status": 6}
+        ],
+        tabIndex: 4,
         tableData: [],
         total: 0,
         pagesize: 10,
@@ -50,16 +56,6 @@
       },
       status(status){
         this.tabIndex = status
-        if(status == 0){
-          this.isHandle = true
-          this.isAdopt = true
-        }else if(status == 1){
-          this.isHandle = false
-          this.isAdopt = true
-        }else if(status == 2){
-          this.isHandle = false
-          this.isAdopt = false
-        }
         this.allOrders(this.pagesize, 1, status)
       },
       page(currentPage) {
@@ -108,7 +104,7 @@
       height: 7%;
       .el-pagination{
         text-align: center;
-        margin-top: 20px;
+        margin-top: 10px;
       }
     }
   }

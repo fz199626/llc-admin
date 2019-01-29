@@ -36,6 +36,11 @@ const router = new Router({
       path: '/feedback',
       name: 'feedback',
       component: () => import(/* webpackChunkName: "feedback" */ './views/Feedback.vue')
+    },
+    {
+      path: '/shopDecoration',
+      name: 'shopDecoration',
+      component: () => import(/* webpackChunkName: "shopDecoration" */ './views/ShopDecoration.vue')
     }
   ]
 })

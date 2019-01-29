@@ -98,7 +98,7 @@ export default {
           this.$emit('refres')
           this.$refs[formData].resetFields()
           this.$refs.upload.clearFiles()
-          this.$message({showClose: true, message: '添加成功！', type: 'success'})
+          this.$message({showClose: true, message: '编辑成功！', type: 'success'})
         }else {
           this.$message({showClose: true, message: '请填写完成信息！', type: 'error'})
         }

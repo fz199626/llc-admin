@@ -8,7 +8,6 @@
     </div>
     <el-table :data="tableData" height="80%" width="100%">
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column prop="id" label="id" width="60"></el-table-column>
       <el-table-column prop="tel" label="手机号"></el-table-column>
       <el-table-column prop="content" label="反馈内容"></el-table-column>
       <el-table-column label="操作">
@@ -76,9 +75,11 @@
       },
       handle(index, rows){
         this.edit(index, rows, 1)
+        this.$message({showClose: true, message: '处理成功！', type: 'success'})
       },
       adopt(index, rows){
         this.edit(index, rows, 2)
+        this.$message({showClose: true, message: '采纳成功！', type: 'success'})
       },
       page(currentPage) {
         this.currentPage = currentPage
@@ -126,7 +127,7 @@
       height: 7%;
       .el-pagination{
         text-align: center;
-        margin-top: 20px;
+        margin-top: 10px;
       }
     }
   }
