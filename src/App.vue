@@ -6,7 +6,7 @@
         <audio src="http://linlinchi-img.auteng.cn/warningtone.mp3" id="audio" hidden></audio>
         <div class="head-portrait">
           <img src="./assets/head.png"/><div>灵灵柒</div>
-          <el-switch v-model="value1" active-color="#13ce66" inactive-color="#ff4949" @change="closeShop" :active-text="valueText"></el-switch>
+          <el-switch v-model="closeShopValue" active-color="#13ce66" inactive-color="#ff4949" @change="closeShop" :active-text="valueText"></el-switch>
         </div>
       </el-header>
       <el-container>
@@ -19,8 +19,8 @@
                   <span>商品</span>
                 </template>
                 <el-menu-item-group>
+                  <el-menu-item index="/goodClassify">分类列表</el-menu-item>
                   <el-menu-item index="/goodList">商品列表</el-menu-item>
-                  <el-menu-item index="/goodClassify">商品分类</el-menu-item>
                 </el-menu-item-group>
               </el-submenu>
               <el-submenu index="2">
@@ -31,7 +31,7 @@
                 </template>
                 <el-menu-item-group>
                   <el-menu-item index="/order">订单</el-menu-item>
-                  <el-menu-item index="/allOrders">全部订单</el-menu-item>
+                  <el-menu-item index="/allOrders">订单列表</el-menu-item>
                 </el-menu-item-group>
               </el-submenu>
               <el-submenu index="3">
@@ -60,7 +60,7 @@
     data() {
       return {
         num: 0,
-        value1: true,
+        closeShopValue: true,
         valueText: '营业中'
       }
     },

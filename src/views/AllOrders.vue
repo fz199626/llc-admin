@@ -8,15 +8,15 @@
     </div>
     <el-table :data="tableData" height="80%" width="100%">
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column prop="contacts" label="姓名"></el-table-column>
-      <el-table-column prop="tel" label="手机号"></el-table-column>
+      <el-table-column prop="contacts" label="姓名" width="100"></el-table-column>
+      <el-table-column prop="tel" label="手机号" width="140"></el-table-column>
       <el-table-column prop="address" label="地址"></el-table-column>
       <el-table-column prop="remarks" label="备注"></el-table-column>
       <el-table-column prop="create_time" label="下单时间"></el-table-column>
-      <el-table-column prop="distribution_fee" label="配送费"></el-table-column>
-      <el-table-column prop="total_price" label="订单金额"></el-table-column>
+      <el-table-column prop="distribution_fee" label="配送费" width="100"></el-table-column>
+      <el-table-column prop="total_price" label="订单金额" width="100"></el-table-column>
       <el-table-column prop="order_num" label="订单号"></el-table-column>
-      <el-table-column prop="status" label="状态"></el-table-column>
+      <el-table-column prop="status" label="状态" width="180"></el-table-column>
     </el-table>
     <div class="allOrders-bottom">
       <el-pagination background layout="prev, pager, next" :total="total" :page-size="pagesize" @current-change="page"></el-pagination>

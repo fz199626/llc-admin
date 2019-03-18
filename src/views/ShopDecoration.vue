@@ -104,18 +104,22 @@
 </script>
 
 <style scoped lang="less">
+  .el-popover{
+    background: red;
+  }
   .shopDecoration{
-    .banner{
+    /deep/
+    .banner{r
       .banner-title{
         background: #ddd;
-        padding: 5px 10px;
+        padding: 5px 20px 5px 10px;
         display: flex;
         justify-content: space-between;
         color: #666;
         div{
           cursor: pointer;
           font-size: 15px;
-          color: #333;
+          color: #409EFF;
         }
       }
       .banner-box{

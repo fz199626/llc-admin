@@ -10,7 +10,7 @@
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column prop="tel" label="手机号"></el-table-column>
       <el-table-column prop="content" label="反馈内容"></el-table-column>
-      <el-table-column label="操作">
+      <el-table-column label="操作" width="230">
         <template slot-scope="scope">
           <el-button v-show="isHandle" size="mini" @click="handle(scope.$index, tableData)">处理</el-button>
           <el-button v-show="isAdopt" size="mini" @click="adopt(scope.$index, tableData)">采纳</el-button>

@@ -13,7 +13,7 @@
       <el-table-column prop="name" label="名称"></el-table-column>
       <el-table-column prop="sort" label="排序"></el-table-column>
       <!--<el-table-column prop="status" label="状态"></el-table-column>-->
-      <el-table-column label="操作">
+      <el-table-column label="操作" width="180">
         <template slot-scope="scope">
           <el-button size="mini" @click="classifyEdit(scope.$index, scope.row)">编辑</el-button>
         </template>
@@ -38,7 +38,7 @@
         pagesize: 10,
         edit: '',
         isShow: false,
-        currentPage: ''
+        currentPage: 1
       }
     },
     mounted() {
@@ -61,7 +61,7 @@
       },
       onRefres() {
         this.isShow = !this.isShow
-        this.classifyList(this.pagesize, this.currentPage)
+        this.classifyList(this.pagesize, this.currentPage, 1)
       },
       page(currentPage) {
         this.currentPage = currentPage

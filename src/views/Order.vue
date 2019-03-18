@@ -2,11 +2,8 @@
   <div class="order">
     <div class="order-nav">
       <div class="nav-li" v-for="tab in tabs" :key="tab.status" @click="tabClick(tab.status)" :style="{ background: tab.bj }">
-        <div class="order-tips">
-          <div>{{tab.title}}</div>
-          <div class="order-num">{{tab.count}}</div>
-        </div>
-        <img :src="tab.img"/>
+        <div>{{tab.title}}</div>
+        <div class="order-num">{{tab.count}}</div>
       </div>
     </div>
     <div class="order-cont">
@@ -33,8 +30,8 @@
               </li>
             </ul>
           </div>
-          <div class="all-list" @click="allList(item)">查看全部订单</div>
           <div class="order-cont-list-li-bon">
+            <div class="all-list" @click="allList(item)">查看全部订单</div>
             <div class="discount">
               <p><span>配送费</span><span>￥{{item.distribution_fee}}</span></p>
               <p><span>优惠折扣</span><span>￥0</span></p>
@@ -104,10 +101,9 @@ export default {
   data() {
     return {
       tabs: [
-        {"title": "新订单","status": "1","count": "0","bj": "#f64045","img": require("./../assets/newOrder.png")},
-        {"title": "待配送","status": "2","count": "0","bj": "#d333be","img": require("./../assets/dispatching.png")},
-        {"title": "配送中","status": "3","count": "0","bj": "#ee8800","img": require("./../assets/distribution.png")},
-        // {"title": "已完成","status": "4","count": "0","bj": "#0ebf38","img": require("./../assets/finish.png")},
+        {"title": "新订单","status": "1","count": "0","bj": "#f64045"},
+        {"title": "待配送","status": "2","count": "0","bj": "#d333be"},
+        {"title": "配送中","status": "3","count": "0","bj": "#ee8800"},
       ],
       nowStatus: 1,
       tableData: [],
@@ -196,12 +192,13 @@ export default {
     height: 100%;
     .order-nav{
       color: #fff;
-      height: 18%;
+      height: 13%;
       margin-bottom: 2%;
       display: flex;
-      justify-content: space-between;
+      /*justify-content: space-between;*/
       .nav-li{
         background: #999;
+        margin-right: 30px;
         width: 16%;
         min-width: 150px;
         border-radius: 10px;
@@ -211,20 +208,13 @@ export default {
         align-items: center;
         padding: 10px 2%;
         font-size: 20px;
-        .order-tips{
-          text-align: center;
-          .order-num{
-            font-size: 60px;
-          }
-        }
-        img{
-          width: 50px;
-          height: 50px;
+        .order-num{
+          font-size: 50px;
         }
       }
     }
     .order-cont{
-      height: 80%;
+      height: 85%;
       width: 100%;
       cursor: pointer;
       position: relative;
@@ -252,11 +242,15 @@ export default {
           margin-left: 20px;
           background: #fff;
           border-radius: 10px;
+          /*display: flex;*/
+          /*flex-wrap: wrap;*/
+          position: relative;
           &:nth-child(1){
             margin-left: 0;
           }
           .order-cont-list-li-cont{
-            height: 50%;
+            /*height: 50%;*/
+            width: 100%;
             .order-cont-list-li-head{
               display: flex;
               justify-content: space-between;
@@ -288,6 +282,8 @@ export default {
             }
             .order-list{
               padding: 15px 5px;
+              max-height: 15px;
+              overflow: hidden;
               li{
                 display: flex;
                 justify-content: space-between;
@@ -323,7 +319,7 @@ export default {
             }
           }
           .all-list{
-            height: 5%;
+            padding: 5px 0;
             width: 50%;
             color: #fff;
             font-size: 14px;
@@ -335,7 +331,12 @@ export default {
             justify-content: center;
           }
           .order-cont-list-li-bon{
-            height: 45%;
+            background: #fff;
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            left: 20px;
+            /*height: 50%;*/
             display: flex;
             align-items: center;
             flex-wrap: wrap;
@@ -349,9 +350,11 @@ export default {
               p:nth-child(1){
                 color: #444;
                 margin-bottom: 10px;
+                margin-top: 10px;
               }
               p:nth-child(2){
                 color: burlywood;
+                margin-bottom: 10px;
               }
             }
             .balance{
@@ -363,6 +366,7 @@ export default {
               border-top: 1px solid #ddd;
               padding-top: 5px;
               align-items: center;
+              margin: 10px 0 20px;
               div{
                 width: 30%;
                 display: flex;
@@ -487,11 +491,6 @@ export default {
           }
         }
       }
-    }
-  }
-  @media (max-height: 1000px) {
-    .order-cont-list-li-cont{
-      height: 35%;
     }
   }
   @media (max-width:980px){

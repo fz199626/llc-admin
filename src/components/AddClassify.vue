@@ -47,6 +47,7 @@
         let data = this.addForm
         this.axios.post(loginUrl, data).then( res => {
           if(res.data.success){
+            this.addForm.id = 0
             this.$emit('refres')
             this.$refs[formData].resetFields()
             this.$message({showClose: true, message: '编辑成功！', type: 'success'})
@@ -56,6 +57,7 @@
         })
       },
       cancel(formData) {
+        this.addForm.id = 0
         this.$emit('refres')
         this.$refs[formData].resetFields()
       }

@@ -8,18 +8,18 @@
         <add-good v-show="isShow" :editData="edit" @refres="onRefres"></add-good>
       </div>
     </div>
-    <el-table :data="tableData.filter(data => !search || data.date.toLowerCase().includes(search.toLowerCase()))" height="80%" width="100%" @selection-change="handleSelectionChange">
+    <el-table :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))" height="80%" width="100%" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column>
         <template slot="header" slot-scope="scope">
           <el-input class="search" v-model="search" size="mini" placeholder="输入编号搜索"/>
         </template>
-        <el-table-column prop="category_id" label="所属分类" width="60"></el-table-column>
+        <el-table-column prop="category.name" label="所属分类"></el-table-column>
         <el-table-column prop="name" label="产品名称"></el-table-column>
         <el-table-column prop="price" label="价格"></el-table-column>
         <el-table-column prop="cost" label="成本"></el-table-column>
         <el-table-column prop="preferential_price" label="优惠价"></el-table-column>
-        <el-table-column prop="" label="操作">
+        <el-table-column prop="" label="操作" width="180">
           <template slot-scope="scope">
             <el-button size="mini" @click="goodEdit(scope.$index, scope.row)">编辑</el-button>
           </template>
@@ -47,7 +47,7 @@
         isShow: false,
         total: 0,
         pagesize: 10,
-        currentPage: ''
+        currentPage: 1
       }
     },
     mounted() {
@@ -74,7 +74,7 @@
       },
       onRefres() {
         this.isShow = !this.isShow
-        this.goodList(this.pagesize, this.currentPage)
+        this.goodList(this.pagesize, this.currentPage, 0)
       },
       handleSelectionChange(val) {
         console.log(val)
